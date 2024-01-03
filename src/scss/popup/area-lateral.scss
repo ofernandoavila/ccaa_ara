@@ -1,0 +1,19 @@
+.area-lateral {
+    width: 40%;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    background-color: white;
+    z-index: 999;
+    padding: 20px;
+
+    &-esquerda {
+        left: 0;
+        right: inherit;
+    }
+
+    &-direita {
+        left: inherit;
+        right: 0;
+    }
+}

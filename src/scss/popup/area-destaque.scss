@@ -1,0 +1,12 @@
+.area-destaque {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    
+    .area-destaque-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: .6);
+    }
+}
