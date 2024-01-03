@@ -5,8 +5,19 @@ type PaginaBasicaProps = {
 }
 
 type GridProps<T extends Record<string, any>> = {
+    renderItem: (item:T) => JSX.Element;
     nomeChave?: string;
     data?: T[];
+    actions?: {
+        previa?: GridAction;
+        editar?: GridAction;
+        remover?: GridAction;
+    };
+}
+
+type GridAction = {
+    icone?: string;
+    acao: () => void;
 }
 
 type AreaDestaqueProps = {
@@ -15,4 +26,8 @@ type AreaDestaqueProps = {
 
 type FiltroProps = {
     OnHandleProcessar: any;
+}
+
+type BotaoFiltroProps = {
+    filtro: JSX.Element;
 }

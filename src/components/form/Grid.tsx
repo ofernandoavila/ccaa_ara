@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { GridProps } from "../types";
 
 export default function Grid<T extends Record<string, any>>(props: GridProps<T>) {
-    const { data, nomeChave } = props;
+    const { data, renderItem, actions } = props;
     const [chaves, setChaves] = useState<string[]>();
 
     useEffect(() => {
@@ -11,33 +11,41 @@ export default function Grid<T extends Record<string, any>>(props: GridProps<T>)
             let chaves = Object.keys(obj);
             setChaves(chaves);
         }
-    });
+    }, []);
 
     if(chaves == undefined) return (<p>Não há dados para mostrar...</p>);
 
     return (
         <table className="table">
             <thead>
-                <tr>{ chaves.map( item => ( <th scope="col">{item}</th> )) }</tr>
+                <tr>
+                { chaves.map( (item, key) => {
+                        return ( <th key={key} scope="col">{item}</th> );
+                })}
+
+                { actions != undefined ?
+                    (<th scope="col">Ações</th>)
+                : ''}
+                </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colSpan={2}>Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                { data ? data.map( (item, key) => (
+                    <tr key={key}>
+                        { renderItem(item) }
+                        { actions != undefined ?
+                            (
+                                <td>
+                                    <ul className="d-flex" style={{ gap: '10px' }}>
+                                        { actions.previa != undefined ? ( <li onClick={e => actions.previa!.acao}>Ver</li> ) : '' }
+                                        { actions.editar != undefined ? ( <li onClick={e => actions.editar!.acao}>Editar</li> ) : '' }
+                                        { actions.remover != undefined ? ( <li onClick={e => actions.remover!.acao}>Remover</li> ) : '' }
+                                    </ul>
+                                </td>
+                            )
+                        : ''}
+                    </tr>
+                ) ) : '' }
+                
             </tbody>
         </table>
     );
