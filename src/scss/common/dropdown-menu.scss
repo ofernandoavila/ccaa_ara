@@ -1,0 +1,13 @@
+.dropdown-menu-parent a:hover + .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu:hover {
+    display: block;
+}
+
+.dropdown-menu {
+    border: none;
+    padding: 10px;
+    line-height: 2.5rem;
+}
