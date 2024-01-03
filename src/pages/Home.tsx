@@ -1,6 +1,5 @@
 import PaginaBasica from "../components/PaginaBasica";
 import FiltroUsuarios from "../components/filtros/FiltroUsuarios";
-import AreaLateral from "../components/popup/AreaLateral";
 import { useTemplate } from "../hooks/useTemplate";
 
 export default function Home() {
